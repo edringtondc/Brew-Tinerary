@@ -1,5 +1,5 @@
-
 import React from 'react';
+import styled from "styled-components";
 import {
   Collapse,
   Navbar,
@@ -11,9 +11,15 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem
+} from 'reactstrap';
+
+
 
 class NavBar extends React.Component {
+  style = {
+    color: "yellow"
+  }
   constructor(props) {
     super(props);
 
@@ -30,24 +36,24 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">BrewTinerary</NavbarBrand>
+        <Navbar color="dark" light expand="md" >
+          <NavbarBrand href="/" style={this.style}>BrewTinerary</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Search</NavLink>
+                <NavLink href="/" style={this.style}>Search</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/saved">My Itineraries</NavLink>
+                <NavLink href="/saved" style={this.style}>My Itineraries</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+              <UncontrolledDropdown nav inNavbar >
+                <DropdownToggle nav caret style={this.style}>
                   Options
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                      Option 1
+                    Option 1
                   </DropdownItem>
                   <DropdownItem>
                     Option 2
