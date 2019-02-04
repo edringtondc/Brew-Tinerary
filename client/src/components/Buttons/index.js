@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, ButtonGroup } from 'reactstrap';
+import React from 'react';
+import { Button } from 'reactstrap';
 
 
 

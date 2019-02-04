@@ -7,8 +7,8 @@ import BreweryListItem from "../BreweryListItem"
 
 import MapContainer from "../Map";
 
-
-import { DragDropContext } from "react-beautiful-dnd";
+import { Col, Row, Container } from 'reactstrap';
+// import { DragDropContext } from "react-beautiful-dnd";
 import "@atlaskit/css-reset";
 import styled from "styled-components";
 import API from "../../utils/API.js"
@@ -16,27 +16,12 @@ import API from "../../utils/API.js"
 
 //don't change droppable/draggable dimensions during a drag
 //udate styles within snapshot as opposed to in props
-const Container = styled.div`
-    display: flex;
+// const Container = styled.div`
+//     display: flex;
   
-`;
+// `;
 
-const Link = styled.a`
-    color: #fb3f00;
-   text-decoration: none;`
 
-const Name = styled.p`
-    color: black;
-    font-size: 18px;
-    margin-left: 8px;
-    margin-right: 8px
-`;
-
-const Address = styled.p`
-    margin-top: 0px;
-    margin-left: 8px;
-    margin-right: 8px
-`;
 
 
 export default class Itinerary extends React.Component {
@@ -182,7 +167,18 @@ export default class Itinerary extends React.Component {
         return (
 
             <>
-                <Search
+
+
+<Container>
+           <Row>
+            <Col md={8}>
+            <MapContainer
+                        google={this.state.search} 
+                    />
+            </Col>
+            <Col md={4}>
+         
+            <Search
                     value={this.state.search}
                     handleInputChange={this.handleInputChange}
                     handleSubmit={this.handleSubmit}
@@ -190,13 +186,13 @@ export default class Itinerary extends React.Component {
             
             <div>Select which breweries you'd like to visit, then select save!</div><SaveButton/>
                 <Container>
-               
-                    <MapContainer
-                        google={this.state.search} 
-                    />
+
+                  
                     {this.state.result.length ? (
                         <div >
                             {this.state.breweryList.map(brewery => (
+
+                                
 
                                 <BreweryListItem 
                                     key={brewery.id} 
@@ -219,6 +215,18 @@ export default class Itinerary extends React.Component {
                             <h3>No Results to Display</h3>
                         )}
                 </Container>
+            </Col>
+
+           </Row>
+       
+          
+            
+        </Container>
+
+
+
+
+
 
 
 
