@@ -1,10 +1,11 @@
 import React from 'react';
 import initialData from "../../initial-data";
-import Column from "../Column";
+
 import Search from "../Search";
-import Checkbox from "../Checkbox"
 import SaveButton from "../Buttons"
 import BreweryListItem from "../BreweryListItem"
+
+import MapContainer from "../Map";
 
 
 import { DragDropContext } from "react-beautiful-dnd";
@@ -51,10 +52,14 @@ export default class Itinerary extends React.Component {
 
     }
 
+    // componentDidMount = () => {
+    //     this.setState({ search: "Denver" });
+    // }
+
     breweryOnly =() =>{
         
         const status = this.state.result
-        console.log(status)
+        // console.log(status)
 
         const breweries = this.state.result.filter(locations => locations.status === "Brewery" || locations.status === "Brewpub")
         this.setState({breweryList: breweries})
@@ -186,6 +191,9 @@ export default class Itinerary extends React.Component {
             <div>Select which breweries you'd like to visit, then select save!</div><SaveButton/>
                 <Container>
                
+                    <MapContainer
+                        google={this.state.search} 
+                    />
                     {this.state.result.length ? (
                         <div >
                             {this.state.breweryList.map(brewery => (
