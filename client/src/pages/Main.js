@@ -1,19 +1,18 @@
 import React from 'react';
 import Itinerary from "../components/Itinerary"
-import Header from "../components/Header"
+import Footer from "../components/Footer"
 import NavBar from "../components/NavBar"
 import styled from "styled-components";
 import MapContainer from "../components/Map"
-import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Col, Row, Container } from 'reactstrap';
 import CarouselPics from "../components/Carousel"
 
 
 
-const Container = styled.div`
-    display: flex
-    width: 90%
-    flex-direction: column
-    justify-content: center
+const Wrapper = styled.div`
+    height: 100%
+    margin: 10px
+    
    
 `;
 
@@ -23,8 +22,8 @@ const Main = () => {
     return (
         <>
         <NavBar/>
-     <CarouselPics/>
-        
+     {/* <CarouselPics/> */}
+        <Wrapper>
         <Container>
            <Row>
             <Col md={8}>
@@ -36,9 +35,11 @@ const Main = () => {
 
            </Row>
        
-          
+           <Footer/>
             
         </Container>
+        </Wrapper>
+       
    
         </>
     )

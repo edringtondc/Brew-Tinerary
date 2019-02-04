@@ -10,7 +10,6 @@ export class MapContainer extends Component {
   style = {
     width: "95%",
     height: 500,
- 
   }
 
 

@@ -10,10 +10,10 @@ const Search = (props) => {
 
       <Form inline>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label for="city" className="mr-sm-2">Location</Label>
-          <Input type="text" placeholder="Search..." name="search" value={props.search} onChange={props.handleInputChange} />
+          <Label for="city" className="mr-sm-2"></Label>
+          <Input type="text" placeholder="Location..." name="search" value={props.search} onChange={props.handleInputChange} />
         </FormGroup>
-        <Button type="submit" onClick={props.handleSubmit}>Search</Button>
+        <Button outline type="submit" color="warning" onClick={props.handleSubmit}>Search</Button>
       </Form>
     
     );

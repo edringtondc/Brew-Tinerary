@@ -2,7 +2,10 @@ import React from 'react';
 import initialData from "../../initial-data";
 import Column from "../Column";
 import Search from "../Search";
-import Checkbox from "../Button"
+import Checkbox from "../Checkbox"
+import SaveButton from "../Buttons"
+import BreweryListItem from "../BreweryListItem"
+
 
 import { DragDropContext } from "react-beautiful-dnd";
 import "@atlaskit/css-reset";
@@ -14,13 +17,9 @@ import API from "../../utils/API.js"
 //udate styles within snapshot as opposed to in props
 const Container = styled.div`
     display: flex;
-    border: 1px solid lightgrey;
+  
 `;
 
-const BreweryListItem = styled.div`
-    border: 1px solid black;
-    background-color: lightgrey
-`;
 const Link = styled.a`
     color: #fb3f00;
    text-decoration: none;`
@@ -38,13 +37,18 @@ const Address = styled.p`
     margin-right: 8px
 `;
 
+
 export default class Itinerary extends React.Component {
 
     state = {
         initialData,
         search: "",
-        result: [""],
+        result: [" "],
         breweryList: []
+    }
+ 
+    onRadioClick = {
+
     }
 
     breweryOnly =() =>{
@@ -178,21 +182,24 @@ export default class Itinerary extends React.Component {
                     handleInputChange={this.handleInputChange}
                     handleSubmit={this.handleSubmit}
                 />
+            
+            <div>Select which breweries you'd like to visit, then select save!</div><SaveButton/>
                 <Container>
+               
                     {this.state.result.length ? (
-                        <div>
+                        <div >
                             {this.state.breweryList.map(brewery => (
 
-                                <BreweryListItem key={brewery.id}>
-                                    {/* <Handle></Handle> */}
-
-                                    <Name>{brewery.name} </Name>  
-            
-                                    <Address> {brewery.street}</Address>
-                                    <Address>{brewery.city}, {brewery.state}</Address>
-                                    {/* <a src={brewery.url} target="_blank">Click to checkout the brewery</a> */}
-                                    <Checkbox/>
-
+                                <BreweryListItem 
+                                    key={brewery.id} 
+                                    name={brewery.name} 
+                                    street={brewery.street} 
+                                    state={brewery.state}
+                                    city={brewery.city}
+                                    url={brewery.url}
+                                    status={brewery.status}
+                                >
+                                   
                                 </BreweryListItem>
 
                                 
