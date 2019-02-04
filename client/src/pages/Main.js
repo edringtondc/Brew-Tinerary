@@ -3,7 +3,7 @@ import Itinerary from "../components/Itinerary"
 import Header from "../components/Header"
 import NavBar from "../components/NavBar"
 import styled from "styled-components";
-import MapContainer from "../components/Map"
+// import MapContainer from "../components/Map"
 import { Col, Row, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import CarouselPics from "../components/Carousel"
 
@@ -28,7 +28,7 @@ const Main = () => {
         <Container>
            <Row>
             <Col md={8}>
-            <MapContainer/>
+            {/* <MapContainer/> */}
             </Col>
             <Col md={4}>
             <Itinerary/>

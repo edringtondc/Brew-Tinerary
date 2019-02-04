@@ -3,6 +3,8 @@ import initialData from "../../initial-data";
 import Column from "../Column";
 import Search from "../Search";
 import Checkbox from "../Button"
+import MapContainer from "../Map";
+
 
 import { DragDropContext } from "react-beautiful-dnd";
 import "@atlaskit/css-reset";
@@ -47,10 +49,14 @@ export default class Itinerary extends React.Component {
         breweryList: []
     }
 
+    // componentDidMount = () => {
+    //     this.setState({ search: "Denver" });
+    // }
+
     breweryOnly =() =>{
         
         const status = this.state.result
-        console.log(status)
+        // console.log(status)
 
         const breweries = this.state.result.filter(locations => locations.status === "Brewery" || locations.status === "Brewpub")
         this.setState({breweryList: breweries})
@@ -179,6 +185,9 @@ export default class Itinerary extends React.Component {
                     handleSubmit={this.handleSubmit}
                 />
                 <Container>
+                    <MapContainer
+                        google={this.state.search} 
+                    />
                     {this.state.result.length ? (
                         <div>
                             {this.state.breweryList.map(brewery => (
