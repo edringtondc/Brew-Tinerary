@@ -4,12 +4,12 @@ import React, { Component } from "react";
 
 
 export class MapContainer extends Component {
-  // constructor(props) {
-  //   super(props);
-    state= {
-      selectedPlace: "Denver"
+  constructor(props) {
+    super(props);
+    this.state= {
+    selectedPlace: "Denver"
     }
-  // }
+  }
   
 
   style = {
@@ -17,7 +17,9 @@ export class MapContainer extends Component {
     height: 500,
  
   }
-
+componentDidMount () {
+  console.log(this.state);
+}
 
   onInfoWindowClose (){
     console.log(this.state.selectedPlace);
@@ -35,7 +37,7 @@ export class MapContainer extends Component {
         }}
         zoom={14}>
  
-        <Marker onClick={this.onMarkerClick}
+        <Marker onClick={this.onMarkerClick.bind(this)}
                 name={this.props.search} />
  
         <InfoWindow onClose={this.onInfoWindowClose}>
