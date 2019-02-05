@@ -64,7 +64,7 @@ class NavBar extends React.Component {
         <Navbar color="dark" light expand="md" >
 
 
-          <NavbarBrand href="/" style={this.style}>  <a class="navbar-brand" href="#">
+          <NavbarBrand href="/" style={this.style}>  <a className="navbar-brand" href="#">
             <img src="../../assets/RFclipart-63304.jpg" width="30" height="30" alt="" />
           </a>BrewTinerary</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />

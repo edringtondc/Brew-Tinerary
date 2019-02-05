@@ -27,7 +27,6 @@ const Main = () => {
 
         <Wrapper>
        
-
             <Itinerary/>
         
         </Wrapper>

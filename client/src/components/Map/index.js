@@ -42,19 +42,31 @@ export class MapContainer extends Component {
           lng: -104.9903,
         }}
         zoom={14}
-    
-        >
+
+      >
 
         {/* <Marker name={"marker"}
               lat=39.7392
               lng="-104.9903"
         /> */}
+        {/* {this.state.mapPins.length ? (
+          <div >
+            {this.state.mapPins.map(pin => (
 
-        
-        <Marker
-          name={"bear's lair"}
-          position={{ lat: 39.7392 , lng: -104.9903 }} />
-        <Marker />
+              <Marker
+                name={pin.name}
+                position={{ lat: pin.lat, lng: pin.lng }}
+                onClick={this.onMarkerClick.bind(this)} />
+      
+            ))}
+
+          </div>
+          //button with Link with to=...
+        ) : (
+            <h3>No Results to Display</h3>
+          )} */}
+
+
 
 
         {/* <Marker onClick={this.onMarkerClick.bind(this)}
