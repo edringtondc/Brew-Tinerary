@@ -7,7 +7,7 @@ const Checkbox = (props) => {
 
     return (
         <>  <form>
-            <input type="checkbox" name={props.name} value={props.value}>save</input>
+            <input type="checkbox" id={props.id} onClick={()=> props.checkedBox(props.id )}>save</input>
             </form>
 
 

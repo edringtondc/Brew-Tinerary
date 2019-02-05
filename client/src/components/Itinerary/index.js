@@ -1,6 +1,6 @@
 import React from 'react';
 import initialData from "../../initial-data";
-
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import Search from "../Search";
 import SaveButton from "../Buttons"
 import BreweryListItem from "../BreweryListItem"
@@ -12,14 +12,18 @@ import { Col, Row, Container } from 'reactstrap';
 import "@atlaskit/css-reset";
 import styled from "styled-components";
 import API from "../../utils/API.js"
+import Checkbox from "../Checkbox"
 
 
 //don't change droppable/draggable dimensions during a drag
 //udate styles within snapshot as opposed to in props
 // const Container = styled.div`
 //     display: flex;
-  
+
 // `;
+
+
+
 
 
 
@@ -30,9 +34,10 @@ export default class Itinerary extends React.Component {
         initialData,
         search: "",
         result: [" "],
-        breweryList: []
+        breweryList: [],
+        savedList: []
     }
- 
+
     onRadioClick = {
 
     }
@@ -41,13 +46,13 @@ export default class Itinerary extends React.Component {
     //     this.setState({ search: "Denver" });
     // }
 
-    breweryOnly =() =>{
-        
+    breweryOnly = () => {
+
         const status = this.state.result
         // console.log(status)
 
         const breweries = this.state.result.filter(locations => locations.status === "Brewery" || locations.status === "Brewpub")
-        this.setState({breweryList: breweries})
+        this.setState({ breweryList: breweries })
 
     }
 
@@ -138,7 +143,7 @@ export default class Itinerary extends React.Component {
             .then(res => {
                 console.log("front end", res)
                 this.setState({ result: res.data })
-                
+
             }).then(res => {
                 this.breweryOnly()
             })
@@ -163,65 +168,82 @@ export default class Itinerary extends React.Component {
     }
 
 
+    checkedBox = (id) => {
+      
+
+            console.log(id)
+            // var newStateArray = this.state.savedList.slice();
+            // newStateArray.push(id);
+
+            // this.setState({ savedList: newStateArray });
+
+        }
+
+
+    
+
+
+
+
     render() {
         return (
 
             <>
 
 
-<Container>
-           <Row>
-            <Col md={8}>
-            <MapContainer
-                        google={this.state.search} 
-                    />
-            </Col>
-            <Col md={4}>
-         
-            <Search
-                    value={this.state.search}
-                    handleInputChange={this.handleInputChange}
-                    handleSubmit={this.handleSubmit}
-                />
-            
-            <div>Select which breweries you'd like to visit, then select save!</div><SaveButton/>
-                <Container>
+                <Container >
+                    <Row>
+                        <Col md={8}>
+                            <MapContainer
+                                google={this.state.search}
+                            />
+                        </Col>
+                        <Col md={4}>
 
-                  
-                    {this.state.result.length ? (
-                        <div >
-                            {this.state.breweryList.map(brewery => (
+                            <Search
+                                value={this.state.search}
+                                handleInputChange={this.handleInputChange}
+                                handleSubmit={this.handleSubmit}
+                            />
 
-                                
+                            <div>Select which breweries you'd like to visit, then select save!</div><SaveButton />
 
-                                <BreweryListItem 
-                                    key={brewery.id} 
-                                    name={brewery.name} 
-                                    street={brewery.street} 
-                                    state={brewery.state}
-                                    city={brewery.city}
-                                    url={brewery.url}
-                                    status={brewery.status}
-                                >
-                                   
-                                </BreweryListItem>
+                            <PerfectScrollbar>
+                            <Container>
 
-                                
-                            ))}
 
-                        </div>
-                          //button with Link with to=...
-                    ) : (
-                            <h3>No Results to Display</h3>
-                        )}
+                                {this.state.result.length ? (
+                                    <div >
+                                        {this.state.breweryList.map(brewery => (
+
+                                            <BreweryListItem
+                                                key={brewery.id}
+                                                name={brewery.name}
+                                                street={brewery.street}
+                                                state={brewery.state}
+                                                city={brewery.city}
+                                                url={brewery.url}
+                                                status={brewery.status}
+                                                checkedBox={this.checkedBox}
+                                                id={brewery.id}
+                                            >
+                                            </BreweryListItem>
+                                        ))}
+
+                                    </div>
+                                    //button with Link with to=...
+                                ) : (
+                                        <h3>No Results to Display</h3>
+                                    )}
+                            </Container>
+                            </PerfectScrollbar>
+                        </Col>
+
+                    </Row>
+
+
+
                 </Container>
-            </Col>
-
-           </Row>
-       
-          
-            
-        </Container>
 
 
 
@@ -248,9 +270,9 @@ export default class Itinerary extends React.Component {
             </>
         );
 
+
     }
 }
-
 
 
 
