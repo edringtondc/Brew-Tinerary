@@ -6,14 +6,13 @@ import styled from "styled-components";
 //     color: #fb3f00;
 //    text-decoration: none;`
 
-const Name = styled.p`
+const Name = styled.span`
     color: black;
     font-size: 18px;
-    margin-left: 8px;
     margin-right: 8px
 `;
 
-const Address = styled.p`
+const Address = styled.span`
     margin-top: 0px;
     margin-left: 8px;
     margin-right: 8px
@@ -23,11 +22,11 @@ const BreweryListItem = (props) => {
   return (
    
         <Card body key={props.id}>
-          <CardTitle><Name>{props.name}</Name></CardTitle>
-          <CardText>{props.status}</CardText>
+          <CardTitle><Name>{props.name}</Name> <Button color="warning" onClick={()=> props.handleSave(props.id)}>Save</Button></CardTitle>
+          <CardText><Name>{props.status}</Name></CardText>
           <CardText><Address>{props.street}</Address></CardText>
           <CardText><Address>{props.city} {props.state}</Address></CardText>
-          <Button color="warning" href={"https://www." + props.url} target="_blank">Brewery Website</Button>
+          <Button color="warning" href={"https://www." + props.url} target="_blank">Brewery Website</Button> 
         </Card>
       
 

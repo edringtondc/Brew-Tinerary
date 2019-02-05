@@ -2,6 +2,7 @@ const axios = require('axios');
 const keys = require("../../keys.js")
 var express = require('express')
 const router = require("express").Router();
+const db = require("../../controllers/brewerycontrollers")
 
 
 
@@ -24,5 +25,8 @@ router.get("/", function (req, res) {
       if (err) { res.json(err) }
     })
 })
+//actual post /api/breweryAPI/saved
+router.route("/saved").post(db.create)
+
 
 module.exports = router;
