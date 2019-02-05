@@ -9,9 +9,12 @@ const db = require("../../controllers/brewerycontrollers")
 const BASEURL = "http://beermapping.com/webservice/loccity/";
 const APIKEY = keys.beerMapping
 
+const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
+const geoKey = "&key=" + keys.google
 
 
 
+// api/breweryAPI/
 router.get("/", function (req, res) {
 
   console.log(req.query)
@@ -25,8 +28,27 @@ router.get("/", function (req, res) {
       if (err) { res.json(err) }
     })
 })
+
+// /api/breweryAPI/geocode
+router.get("/geocode", function (req, res) {
+
+  
+  // console.log("geo query: " ,  req.query)
+
+  axios.get(geoURL + req.query.q + geoKey)
+
+    .then(function (response) {
+      console.log(response.data)
+      // console.log("query", req.query)
+
+      res.json(response.data)
+
+    }).catch(function (err) {
+      if (err) { res.json(err) }
+    })
+})
+
 //actual post /api/breweryAPI/saved
 router.route("/saved").post(db.create)
-
 
 module.exports = router;

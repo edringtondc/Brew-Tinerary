@@ -1,15 +1,17 @@
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import React, { Component } from "react";
+import Pin from "./marker"
 
 
 export class MapContainer extends Component {
-  // constructor(props) {
-  //   super(props);
-    state= {
-    selectedPlace: "Denver"
+  constructor(props) {
+    super(props);
+    this.state = {
+
+      selectedPlace: "Denver"
     }
-  // }
-  
+  }
+
 
   style = {
     width: "95%",
@@ -17,29 +19,52 @@ export class MapContainer extends Component {
   }
 
 
-  onInfoWindowClose (){
+
+  componentDidMount() {
+
+    console.log(this.state);
+  }
+
+  onInfoWindowClose() {
     console.log(this.state.selectedPlace);
   }
-  onMarkerClick (){
+  onMarkerClick() {
     console.log(this.state.selectedPlace);
   }
   render() {
     return (
-      <Map google={this.props.google} 
+
+      <Map id="map" google={this.props.google}
         style={this.style}
         initialCenter={{
-            lat: 39.7392,
-            lng: -104.9903,
+          lat: 39.7392,
+          lng: -104.9903,
         }}
-        zoom={14}>
- 
-        <Marker onClick={this.onMarkerClick}
-                name={this.props.search} />
- 
+        zoom={14}
+    
+        >
+
+        {/* <Marker name={"marker"}
+              lat=39.7392
+              lng="-104.9903"
+        /> */}
+
+        
+        <Marker
+          name={"bear's lair"}
+          position={{ lat: 39.7392 , lng: -104.9903 }} />
+        <Marker />
+
+
+        {/* <Marker onClick={this.onMarkerClick.bind(this)}
+                name={this.props.search} /> */}
+
+
+
         <InfoWindow onClose={this.onInfoWindowClose}>
-            <div>
-              <h1>{this.state.selectedPlace}</h1>
-            </div>
+          <div>
+            <h1>{this.state.selectedPlace}</h1>
+          </div>
         </InfoWindow>
       </Map>
     );
@@ -48,6 +73,7 @@ export class MapContainer extends Component {
 
 export default GoogleApiWrapper(
   (props) => ({
-  apiKey: ("AIzaSyA7UZmTHAMl9HcH5nUwa7kJixTYgwWKr4Q")
-    }
-)) (MapContainer)
+    apiKey: ("AIzaSyA7UZmTHAMl9HcH5nUwa7kJixTYgwWKr4Q")
+  }
+  ))(MapContainer)
+
