@@ -9,6 +9,11 @@ export default {
   saveBreweries: function(breweries){
 
     return axios.post("/api/breweryAPI/saved", breweries )
+  },
+
+  geoCode: function(address){
+    console.log("address " + address)
+    return axios.get(`/api/breweryAPI/geocode?q=${address}`)
   }
   // // Gets the book with the given id
   // getBook: function(id) {

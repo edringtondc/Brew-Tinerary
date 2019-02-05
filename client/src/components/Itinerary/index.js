@@ -11,23 +11,8 @@ import MapContainer from "../Map";
 import { Col, Row, Container } from 'reactstrap';
 // import { DragDropContext } from "react-beautiful-dnd";
 import "@atlaskit/css-reset";
-import styled from "styled-components";
+// import styled from "styled-components";
 import API from "../../utils/API.js"
-
-
-
-//don't change droppable/draggable dimensions during a drag
-//udate styles within snapshot as opposed to in props
-// const Container = styled.div`
-//     display: flex;
-
-// `;
-
-
-
-
-
-
 
 export default class Itinerary extends React.Component {
 
@@ -37,26 +22,60 @@ export default class Itinerary extends React.Component {
         result: [" "],
         breweryList: [],
         savedList: [],
+        locations: []
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        // Typical usage (don't forget to compare props):
+
+        if (this.state.result !== prevState.result){
+            for (let i = 0; i< this.state.result.length; i++){
+                var result = this.state.result[i]
+                var address = `${result.street}, ${result.city}, ${result.state},`
+
+                this.getGeoCode(address)
+                //geocode
+                console.log(address)
+
+            }
+        }
+        // console.log(prevProps)
+        // console.log(prevState)
+        // console.log("state " , this.state)
+        //    console.log("component updated")
+        
+    }
+
+    getGeoCode = query => {
+        console.log("query: " + query)
+
+        API.geoCode(query)
+            .then(res => {
+                console.log("Geo Code", res)
+
+                this.setState({ locations: res.data })
+
+
+            }).then(res => {
+             console.log(this.state.locations)
+
+            })
+            .catch(err => console.log(err));
+    };
 
     saveBreweries = () => {
         console.log("saveBreweries called")
 
         API.saveBreweries(this.state.savedList)
-        .then(function(res){
-            console.log(res)
-        })
+            .then(function (res) {
+                console.log(res)
+            })
 
     }
- 
-
-    // componentDidMount = () => {
-    //     this.setState({ search: "Denver" });
-    // }
 
     breweryOnly = () => {
 
-        const status = this.state.result
+        // const status = this.state.result
         // console.log(status)
 
         const breweries = this.state.result.filter(locations => locations.status === "Brewery" || locations.status === "Brewpub")
@@ -145,12 +164,22 @@ export default class Itinerary extends React.Component {
         this.setState(newState);
     }
 
+    //take this.state.result - when data comes back
+    //loop through and get geocoded information (promise.all)
+    //when that comes back. update the pushpins, and then 
+    //render to the map once we have all the push pin info
+
+
+
+
+
     searchBreweries = query => {
         // alert("in searchBreweries")
         API.getBreweries(query)
             .then(res => {
                 console.log("front end", res)
-                this.setState({ result: res.data })
+
+                this.setState({ result: res.data.slice(0, 10) })
 
             }).then(res => {
                 this.breweryOnly()
@@ -182,20 +211,20 @@ export default class Itinerary extends React.Component {
         var newStateArray = this.state.savedList.slice();
 
         newStateArray.push(savedID);
-    
+
         this.setState({ savedList: newStateArray });
         //need to save other data
 
 
     }
 
+    
+
 
     render() {
         return (
 
             <>
-
-
                 <Container >
                     <Row>
                         <Col md={8}>
@@ -211,36 +240,36 @@ export default class Itinerary extends React.Component {
                                 handleSubmit={this.handleSubmit}
                             />
                             <div> Save selections: <SaveButton saveBreweries={this.saveBreweries} /></div>
-                          
+
 
                             <PerfectScrollbar>
-                            <Container>
+                                <Container>
 
 
-                                {this.state.result.length ? (
-                                    <div >
-                                        {this.state.breweryList.map(brewery => (
+                                    {this.state.result.length ? (
+                                        <div >
+                                            {this.state.breweryList.map(brewery => (
 
-                                            <BreweryListItem
-                                                key={brewery.id}
-                                                name={brewery.name}
-                                                street={brewery.street}
-                                                state={brewery.state}
-                                                city={brewery.city}
-                                                url={brewery.url}
-                                                status={brewery.status}
-                                                handleSave={this.handleSave}
-                                                id={brewery.id}
-                                            >
-                                            </BreweryListItem>
-                                        ))}
+                                                <BreweryListItem
+                                                    key={brewery.id}
+                                                    name={brewery.name}
+                                                    street={brewery.street}
+                                                    state={brewery.state}
+                                                    city={brewery.city}
+                                                    url={brewery.url}
+                                                    status={brewery.status}
+                                                    handleSave={this.handleSave}
+                                                    id={brewery.id}
+                                                >
+                                                </BreweryListItem>
+                                            ))}
 
-                                    </div>
-                                    //button with Link with to=...
-                                ) : (
-                                        <h3>No Results to Display</h3>
-                                    )}
-                            </Container>
+                                        </div>
+                                        //button with Link with to=...
+                                    ) : (
+                                            <h3>No Results to Display</h3>
+                                        )}
+                                </Container>
                             </PerfectScrollbar>
                         </Col>
 

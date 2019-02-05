@@ -5,6 +5,7 @@ const breweryController = require("../../controllers/brewerycontrollers");
 router.route("/") //api/brewery/
   .get(breweryController.findAll)
   .post(breweryController.create);
+  
 
 // Matches with "/api/books/:id"
 router
