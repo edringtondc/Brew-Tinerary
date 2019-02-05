@@ -7,7 +7,8 @@ export class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state= {
-    selectedPlace: "Denver"
+
+    selectedPlace: "Denver
     }
   }
   
@@ -15,7 +16,6 @@ export class MapContainer extends Component {
   style = {
     width: "95%",
     height: 500,
- 
   }
 componentDidMount () {
   console.log(this.state);
