@@ -7,7 +7,7 @@ export class MapContainer extends Component {
   // constructor(props) {
   //   super(props);
     state= {
-      selectedPlace: "Denver"
+    selectedPlace: "Denver"
     }
   // }
   
