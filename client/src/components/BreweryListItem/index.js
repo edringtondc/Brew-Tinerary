@@ -22,7 +22,7 @@ const BreweryListItem = (props) => {
   return (
    
         <Card body key={props.id}>
-          <CardTitle><Name>{props.name}</Name> <input type="checkbox" id={props.id}  onClick={props.checkedBox(props.id)}/></CardTitle>
+          <CardTitle><Name>{props.name}</Name> <Button color="warning" onClick={()=> props.handleSave(props.id)}>Save</Button></CardTitle>
           <CardText><Name>{props.status}</Name></CardText>
           <CardText><Address>{props.street}</Address></CardText>
           <CardText><Address>{props.city} {props.state}</Address></CardText>
