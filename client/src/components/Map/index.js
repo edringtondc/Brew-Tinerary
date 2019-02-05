@@ -8,7 +8,7 @@ export class MapContainer extends Component {
     super(props);
     this.state= {
 
-    selectedPlace: "Denver
+    selectedPlace: "Denver"
     }
   }
   

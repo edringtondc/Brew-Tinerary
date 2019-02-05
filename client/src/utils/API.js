@@ -5,6 +5,10 @@ export default {
   getBreweries: function(search) {
     // alert("we;re werrawdfakjdfn")
     return axios.get(`/api/breweryAPI?q=${search}`); 
+  },
+  saveBreweries: function(breweries){
+
+    return axios.post("/api/breweryAPI/saved", breweries )
   }
   // // Gets the book with the given id
   // getBook: function(id) {

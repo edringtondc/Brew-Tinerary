@@ -5,6 +5,7 @@ import Search from "../Search";
 import SaveButton from "../Buttons"
 import BreweryListItem from "../BreweryListItem"
 
+
 import MapContainer from "../Map";
 
 import { Col, Row, Container } from 'reactstrap';
@@ -12,7 +13,7 @@ import { Col, Row, Container } from 'reactstrap';
 import "@atlaskit/css-reset";
 import styled from "styled-components";
 import API from "../../utils/API.js"
-import Checkbox from "../Checkbox"
+
 
 
 //don't change droppable/draggable dimensions during a drag
@@ -35,12 +36,19 @@ export default class Itinerary extends React.Component {
         search: "",
         result: [" "],
         breweryList: [],
-        savedList: []
+        savedList: [],
     }
 
-    onRadioClick = {
+    saveBreweries = () => {
+        console.log("saveBreweries called")
+
+        API.saveBreweries(this.state.savedList)
+        .then(function(res){
+            console.log(res)
+        })
 
     }
+ 
 
     // componentDidMount = () => {
     //     this.setState({ search: "Denver" });
@@ -168,21 +176,18 @@ export default class Itinerary extends React.Component {
     }
 
 
-    checkedBox = (id) => {
-      
+    handleSave = (id) => {
+        console.log("Saved: " + id)
+        let savedID = id;
+        var newStateArray = this.state.savedList.slice();
 
-            console.log(id)
-            // var newStateArray = this.state.savedList.slice();
-            // newStateArray.push(id);
-
-            // this.setState({ savedList: newStateArray });
-
-        }
-
-
+        newStateArray.push(savedID);
     
+        this.setState({ savedList: newStateArray });
+        //need to save other data
 
 
+    }
 
 
     render() {
@@ -205,8 +210,8 @@ export default class Itinerary extends React.Component {
                                 handleInputChange={this.handleInputChange}
                                 handleSubmit={this.handleSubmit}
                             />
-
-                            <div>Select which breweries you'd like to visit, then select save!</div><SaveButton />
+                            <div> Save selections: <SaveButton saveBreweries={this.saveBreweries} /></div>
+                          
 
                             <PerfectScrollbar>
                             <Container>
@@ -224,7 +229,7 @@ export default class Itinerary extends React.Component {
                                                 city={brewery.city}
                                                 url={brewery.url}
                                                 status={brewery.status}
-                                                checkedBox={this.checkedBox}
+                                                handleSave={this.handleSave}
                                                 id={brewery.id}
                                             >
                                             </BreweryListItem>
