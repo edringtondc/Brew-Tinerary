@@ -7,7 +7,8 @@ export class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state= {
-      selectedPlace: "Denver"
+
+    selectedPlace: "Denver
     }
   }
   
@@ -16,7 +17,9 @@ export class MapContainer extends Component {
     width: "95%",
     height: 500,
   }
-
+componentDidMount () {
+  console.log(this.state);
+}
 
   onInfoWindowClose (){
     console.log(this.state.selectedPlace);
