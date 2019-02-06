@@ -7,6 +7,7 @@
     "node": "11.0.0"
   },
   "scripts": {
+
     "start": "if-env NODE_ENV=production && yarn run start:prod || yarn run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"yarn run client\"",
@@ -14,6 +15,7 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install",
     "build": "cd client && yarn run build",
+    "heroku-prebuild": "yarn install --production=false",
     "heroku-postbuild": "yarn run build", 
     "web": "yarn start:prod"
   },
