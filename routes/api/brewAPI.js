@@ -48,7 +48,14 @@ router.get("/geocode", function (req, res) {
     })
 })
 
+
 //actual post /api/breweryAPI/saved
 router.route("/saved").post(brewController.createMany)
+// /api.breweryAPI/savedAll
+
+router.route("/savedAll")
+  .get(brewController.findAll)
+
+
 
 module.exports = router;

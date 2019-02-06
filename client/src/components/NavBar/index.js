@@ -17,7 +17,7 @@ import {
 
 class NavBar extends React.Component {
   style = {
-    color: "yellow"
+    color: "#f4be41"
   }
   constructor(props) {
     super(props);

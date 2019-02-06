@@ -14,6 +14,10 @@ import "@atlaskit/css-reset";
 // import styled from "styled-components";
 import API from "../../utils/API.js"
 
+
+
+
+
 export default class Itinerary extends React.Component {
 
     state = {
@@ -22,7 +26,7 @@ export default class Itinerary extends React.Component {
         result: [" "],
         breweryList: [],
         savedList: [],
-        locations: [], 
+        locations: [],
         mapPins: [],
     }
 
@@ -36,9 +40,9 @@ export default class Itinerary extends React.Component {
                 var address = `${result.street}, ${result.city}, ${result.state},`
                 addressArray.push(address)
 
-                
+
             }
-         
+
             console.log(addressArray)
             for (let i = 0; i < addressArray.length; i++) {
                 this.getGeoCode(addressArray[i])
@@ -70,7 +74,7 @@ export default class Itinerary extends React.Component {
                     const lat = Number(this.state.locations.results[0].geometry.location.lat)
                     const lng = Number(this.state.locations.results[0].geometry.location.lng)
 
-                    
+
                     this.makePins(lat, lng, "test")
 
                     // for (let i = 0; i < this.state.locations.length; i++) {
@@ -89,10 +93,10 @@ export default class Itinerary extends React.Component {
     makePins = (lat, lng, name) => {
         console.log("lat " + lat)
         console.log("lng " + lng)
-       
 
 
-        
+
+
 
         // const newPin = {lat, lng, name}
         // const newMapPins = this.state.mapPins
@@ -108,7 +112,7 @@ export default class Itinerary extends React.Component {
         API.saveBreweries(this.state.savedList)
             .then(function (res) {
                 console.log("Save Breweries.then")
-                console.log(res)
+                // console.log(res)
             })
 
     }
@@ -255,8 +259,13 @@ export default class Itinerary extends React.Component {
         this.setState({ savedList: newStateArray });
         //need to save other data
 
+        API.getAllSaved()
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+
 
     }
+
 
 
 
@@ -279,10 +288,11 @@ export default class Itinerary extends React.Component {
                                 handleInputChange={this.handleInputChange}
                                 handleSubmit={this.handleSubmit}
                             />
-                            <div> Save selections: <SaveButton saveBreweries={this.saveBreweries} /></div>
+                            <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>
 
 
                             <PerfectScrollbar>
+
                                 <Container>
 
 
@@ -310,6 +320,7 @@ export default class Itinerary extends React.Component {
                                             <h3>No Results to Display</h3>
                                         )}
                                 </Container>
+
                             </PerfectScrollbar>
                         </Col>
 

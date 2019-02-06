@@ -1,7 +1,7 @@
 
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React, { Component } from "react";
-import Pin from "./marker"
+// import Pin from "./marker"
 
 
 export class MapContainer extends Component {
@@ -45,10 +45,11 @@ export class MapContainer extends Component {
 
       >
 
-        {/* <Marker name={"marker"}
-              lat=39.7392
+        <Marker name={"marker"}
+              lat="39.7392"
               lng="-104.9903"
-        /> */}
+        />
+        
         {/* {this.state.mapPins.length ? (
           <div >
             {this.state.mapPins.map(pin => (

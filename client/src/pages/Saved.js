@@ -1,4 +1,4 @@
-import { React, Component } from 'react';
+import React, {Component } from 'react';
 import NavBar from "../components/NavBar"
 import API from "../utils/API"
 // import styled from "styled-components";
@@ -6,22 +6,28 @@ import API from "../utils/API"
 
 
 class Saved extends Component {
+    state = {
+        
+    }
 
+    componentDidMount(){
+        console.log("Mounted")
+        this.loadSavedBreweries()
 
-    // componentDidMount(){
-    //     this.loadSavedBreweries()
-
-    // }
+    }
 
 
 
     loadSavedBreweries = () => {
-        API.getBreweries()
+        API.getAllSaved()
             .then(res =>
-                this.setState({ breweries: res.data, name: "", status: "", city: "", state: "", address: "", date: "" })
-            )
-            .catch(err => console.log(err));
-    };
+                //being returned an array - put that up in state -  from state - render 
+                // this.setState({ breweries: res.data, name: "", status: "", city: "", state: "", address: "", date: "" })
+                console.log("res " ,res.data)
+
+                )
+            .catch(err => console.log("error" , err));
+    }
 
     render() {
         return (
