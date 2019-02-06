@@ -28,6 +28,7 @@ export default class Itinerary extends React.Component {
         savedList: [],
         locations: [],
         mapPins: [],
+        searchLatLong: {}
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -66,16 +67,22 @@ export default class Itinerary extends React.Component {
                 console.log("Geo Code", res)
                 const locations = res.data
 
-                this.setState({ locations: locations }, () => {
+                console.log(res.data)
+                this.setState({ locations: [...this.state.locations, locations.results[0]] }, () => {
+
                     // console.log("state: ", this.state.locations)
 
                     // console.log(this.state.locations.results[0].geometry.location)
 
-                    const lat = Number(this.state.locations.results[0].geometry.location.lat)
-                    const lng = Number(this.state.locations.results[0].geometry.location.lng)
+                    const newLocations = this.state.locations.map(location => {
+                        return location.geometry.location
+                     
+                    })
 
 
-                    this.makePins(lat, lng, "test")
+                    this.setState({mapPins: newLocations})
+
+                    
 
                     // for (let i = 0; i < this.state.locations.length; i++) {
                     //     const lat = this.state.locations[i].results[0].geometry.location.lat
@@ -90,21 +97,6 @@ export default class Itinerary extends React.Component {
             .catch(err => console.log(err));
     };
 
-    makePins = (lat, lng, name) => {
-        console.log("lat " + lat)
-        console.log("lng " + lng)
-
-
-
-
-
-        // const newPin = {lat, lng, name}
-        // const newMapPins = this.state.mapPins
-
-        // newMapPins.push(newPin)
-        // this.setState({mapPins: newMapPins})
-
-    }
 
     saveBreweries = () => {
         console.log("saveBreweries called")
@@ -190,6 +182,8 @@ export default class Itinerary extends React.Component {
                         <Col md={8}>
                             <MapContainer
                                 google={this.state.search}
+                                mapPins ={this.state.mapPins}
+                                search={this.state.search}
                             />
                         </Col>
                         <Col md={4}>
@@ -198,41 +192,42 @@ export default class Itinerary extends React.Component {
                                 value={this.state.search}
                                 handleInputChange={this.handleInputChange}
                                 handleSubmit={this.handleSubmit}
+
                             />
                             <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>
 
 
-                    
-
-                                <Container >
 
 
-                                    {this.state.result.length ? (
-                                        <div >
-                                            {this.state.breweryList.map(brewery => (
+                            <Container >
 
-                                                <BreweryListItem
-                                                    key={brewery.id}
-                                                    name={brewery.name}
-                                                    street={brewery.street}
-                                                    state={brewery.state}
-                                                    city={brewery.city}
-                                                    url={brewery.url}
-                                                    status={brewery.status}
-                                                    handleSave={this.handleSave}
-                                                    id={brewery.id}
-                                                >
-                                                </BreweryListItem>
-                                            ))}
 
-                                        </div>
-                                        //button with Link with to=...
-                                    ) : (
-                                            <h3>No Results to Display</h3>
-                                        )}
-                                </Container>
+                                {this.state.result.length ? (
+                                    <div >
+                                        {this.state.breweryList.map(brewery => (
 
-                        
+                                            <BreweryListItem
+                                                key={brewery.id}
+                                                name={brewery.name}
+                                                street={brewery.street}
+                                                state={brewery.state}
+                                                city={brewery.city}
+                                                url={brewery.url}
+                                                status={brewery.status}
+                                                handleSave={this.handleSave}
+                                                id={brewery.id}
+                                            >
+                                            </BreweryListItem>
+                                        ))}
+
+                                    </div>
+                                    //button with Link with to=...
+                                ) : (
+                                        <h3>No Results to Display</h3>
+                                    )}
+                            </Container>
+
+
                         </Col>
 
                     </Row>
