@@ -1,7 +1,7 @@
 
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React, { Component } from "react";
-import Pin from "./marker"
+// import Pin from "./marker"
 
 
 export class MapContainer extends Component {
@@ -42,19 +42,32 @@ export class MapContainer extends Component {
           lng: -104.9903,
         }}
         zoom={14}
-    
-        >
 
-        {/* <Marker name={"marker"}
-              lat=39.7392
+      >
+
+        <Marker name={"marker"}
+              lat="39.7392"
               lng="-104.9903"
-        /> */}
-
+        />
         
-        <Marker
-          name={"bear's lair"}
-          position={{ lat: 39.7392 , lng: -104.9903 }} />
-        <Marker />
+        {/* {this.state.mapPins.length ? (
+          <div >
+            {this.state.mapPins.map(pin => (
+
+              <Marker
+                name={pin.name}
+                position={{ lat: pin.lat, lng: pin.lng }}
+                onClick={this.onMarkerClick.bind(this)} />
+      
+            ))}
+
+          </div>
+          //button with Link with to=...
+        ) : (
+            <h3>No Results to Display</h3>
+          )} */}
+
+
 
 
         {/* <Marker onClick={this.onMarkerClick.bind(this)}
