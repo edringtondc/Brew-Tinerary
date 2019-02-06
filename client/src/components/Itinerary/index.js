@@ -30,14 +30,15 @@ export default class Itinerary extends React.Component {
         // Typical usage (don't forget to compare props):
 
         if (this.state.result !== prevState.result) {
+            var addressArray = []
             for (let i = 0; i < this.state.result.length; i++) {
                 var result = this.state.result[i]
                 var address = `${result.street}, ${result.city}, ${result.state},`
-                var addressArray = []
-
                 addressArray.push(address)
+
+                
             }
-            
+         
             console.log(addressArray)
             for (let i = 0; i < addressArray.length; i++) {
                 this.getGeoCode(addressArray[i])
@@ -69,6 +70,7 @@ export default class Itinerary extends React.Component {
                     const lat = Number(this.state.locations.results[0].geometry.location.lat)
                     const lng = Number(this.state.locations.results[0].geometry.location.lng)
 
+                    
                     this.makePins(lat, lng, "test")
 
                     // for (let i = 0; i < this.state.locations.length; i++) {
@@ -87,12 +89,16 @@ export default class Itinerary extends React.Component {
     makePins = (lat, lng, name) => {
         console.log("lat " + lat)
         console.log("lng " + lng)
+       
 
-        const newPin = {lat, lng, name}
-        const newMapPins = this.state.mapPins
 
-        newMapPins.push(newPin)
-        this.setState({mapPins: newMapPins})
+        
+
+        // const newPin = {lat, lng, name}
+        // const newMapPins = this.state.mapPins
+
+        // newMapPins.push(newPin)
+        // this.setState({mapPins: newMapPins})
 
     }
 
@@ -101,6 +107,7 @@ export default class Itinerary extends React.Component {
 
         API.saveBreweries(this.state.savedList)
             .then(function (res) {
+                console.log("Save Breweries.then")
                 console.log(res)
             })
 

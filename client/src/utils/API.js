@@ -7,6 +7,7 @@ export default {
     return axios.get(`/api/breweryAPI?q=${search}`); 
   },
   saveBreweries: function(breweries){
+    console.log("breweries", breweries)
 
     return axios.post("/api/breweryAPI/saved", breweries )
   },
