@@ -28,7 +28,11 @@ export default class Itinerary extends React.Component {
         savedList: [],
         locations: [],
         mapPins: [],
-        searchLatLong: {}
+        searchLatLong: {},
+        mapCenter: {
+            lat: 39.7392,
+            lng: -104.9903,
+          },
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -76,13 +80,13 @@ export default class Itinerary extends React.Component {
 
                     const newLocations = this.state.locations.map(location => {
                         return location.geometry.location
-                     
+
                     })
 
 
-                    this.setState({mapPins: newLocations})
+                    this.setState({ mapPins: newLocations })
 
-                    
+
 
                     // for (let i = 0; i < this.state.locations.length; i++) {
                     //     const lat = this.state.locations[i].results[0].geometry.location.lat
@@ -135,19 +139,31 @@ export default class Itinerary extends React.Component {
     };
 
     handleInputChange = event => {
-        const { name, value } = event.target
-        this.setState({
-            [name]: value
-        })
+        const { value } = event.target
+        if (value !== "") {
+            this.setState({
+                search: value
+            })
+        }
+
 
     }
 
     handleSubmit = event => {
         event.preventDefault();
+   
+
+        API.geoCode(this.state.search)
+            .then(res => {
+                console.log("Map geo", res)
+                this.setState({ mapCenter: res.data.results[0].geometry.location })
+
+            })
 
         console.log("submitted")
         console.log("state", this.state.result)
         this.searchBreweries(this.state.search);
+
 
     }
 
@@ -168,9 +184,7 @@ export default class Itinerary extends React.Component {
 
 
     }
-
-
-
+    
 
 
     render() {
@@ -182,8 +196,9 @@ export default class Itinerary extends React.Component {
                         <Col md={8}>
                             <MapContainer
                                 google={this.state.search}
-                                mapPins ={this.state.mapPins}
-                                search={this.state.search}
+                                mapPins={this.state.mapPins}
+                                center={this.state.mapCenter}
+
                             />
                         </Col>
                         <Col md={4}>
@@ -192,6 +207,7 @@ export default class Itinerary extends React.Component {
                                 value={this.state.search}
                                 handleInputChange={this.handleInputChange}
                                 handleSubmit={this.handleSubmit}
+                               
 
                             />
                             <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>

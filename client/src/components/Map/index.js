@@ -10,13 +10,10 @@ export class MapContainer extends Component {
     this.state = {
 
       selectedPlace: "Denver",
-      searchLatLng: {
-        lat: 39.7392,
-        lng: -104.9903,
-      },
+   
       showingInfoWindow: false,
       activeMarker: {},
-     
+
     }
   }
 
@@ -26,26 +23,29 @@ export class MapContainer extends Component {
     height: 500,
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // Typical usage (don't forget to compare props):
+  // componentDidUpdate(prevProps, prevState) {
+  //   // Typical usage (don't forget to compare props):
 
-    if (prevProps.search !== this.props.search) {
+  //   if (prevProps.search !== this.props.search) {
 
-      this.setState({ selectedPlace: this.props.search }, () => {
-        API.geoCode(this.state.selectedPlace)
-          .then(res => {
-            console.log("Map geo", res)
-            this.setState({ searchLatLng: res.data.results[0].geometry.location })
+  //     this.setState({ selectedPlace: this.props.search }, () => {
 
-          })
+  //       API.geoCode(this.props.search)
+  //         .then(res => {
+  //           console.log("Map geo", res)
+  //           this.setState({ searchLatLng: res.data.results[0].geometry.location })
 
-
-
-      })
-    }
+  //         })
 
 
-  }
+
+  //     })
+  //   }
+
+
+  // }
+
+ 
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -63,24 +63,24 @@ export class MapContainer extends Component {
   onInfoWindowClose() {
     console.log(this.state.selectedPlace);
   }
- 
+
   render() {
     return (
 
       <Map id="map" google={this.props.google}
-        
+
         style={this.style}
         initialCenter={{
           lat: 39.7392,
           lng: -104.9903,
         }}
-        center={this.state.searchLatLng}
+        center={this.props.center}
         zoom={14}
 
       >
         {this.props.mapPins.map(pin => {
           return <Marker
-            key={this.state.searchLatLng.lat}
+          
             onClick={this.onMarkerClick}
             position={pin}
           />
