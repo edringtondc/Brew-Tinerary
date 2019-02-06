@@ -17,8 +17,9 @@
     "build": "cd client && yarn run build",
     "heroku-prebuild": "yarn install --production=false",
     "heroku-postbuild": "yarn run build", 
-    "web": "yarn start:prod"
+    "web": "npm start:prod"
   },
+
   "author": "",
   "license": "ISC",
   "devDependencies": {
