@@ -15,7 +15,6 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install",
     "build": "cd client && yarn run build",
-    "heroku-prebuild": "yarn install --production=false",
     "heroku-postbuild": "yarn run build", 
     "web": "npm start:prod"
   },

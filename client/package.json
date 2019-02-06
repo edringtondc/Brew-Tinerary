@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001/",
-  "homepage": "https://brewtinerary.herokuapp.com/",
+  "homepage": "https://sheltered-ocean-66992.herokuapp.com/",
   "dependencies": {
     "@atlaskit/css-reset": "^3.0.5",
     "axios": "^0.18.0",
