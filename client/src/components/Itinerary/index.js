@@ -1,6 +1,6 @@
 import React from 'react';
 import initialData from "../../initial-data";
-import PerfectScrollbar from 'react-perfect-scrollbar';
+
 import Search from "../Search";
 import SaveButton from "../Buttons"
 import BreweryListItem from "../BreweryListItem"
