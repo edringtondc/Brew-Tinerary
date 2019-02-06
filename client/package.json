@@ -19,7 +19,6 @@
     "reactstrap": "^7.1.0",
     "styled-components": "4.1.4-alpha.2"
   },
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
