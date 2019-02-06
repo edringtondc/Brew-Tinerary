@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 
 const SaveButton = (props) => {
     return (
-        <Button outline color="warning" id={"save"} onClick={props.saveBreweries}>Save</Button>
+        <Button color="warning" className="m-2"  id={"save"} onClick={props.saveBreweries}>Click here to save selections</Button>
     )
 }
 

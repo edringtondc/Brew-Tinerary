@@ -22,11 +22,11 @@ const BreweryListItem = (props) => {
   return (
    
         <Card body key={props.id}>
-          <CardTitle><Name>{props.name}</Name> <Button color="warning" onClick={()=> props.handleSave(props.id)}>Save</Button></CardTitle>
-          <CardText><Name>{props.status}</Name></CardText>
+          <CardTitle><Name>{props.name}</Name> <Button className="mx-1" color="warning" onClick={()=> props.handleSave(props.id)}>Select</Button></CardTitle>
+          <CardText>{props.status}</CardText>
           <CardText><Address>{props.street}</Address></CardText>
           <CardText><Address>{props.city} {props.state}</Address></CardText>
-          <Button color="warning" href={"https://www." + props.url} target="_blank">Brewery Website</Button> 
+          <Button color="warning" className="mt-2" href={"https://www." + props.url} target="_blank">Brewery Website</Button> 
         </Card>
       
 
