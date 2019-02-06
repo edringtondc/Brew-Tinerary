@@ -1,7 +1,7 @@
 import React from 'react';
 import "./App.css"
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
+import Footer from "./components/Footer"
 import Main from "./pages/Main";
 import Saved from "./pages/Saved";
 import Login from "./pages/Login";
@@ -30,6 +30,7 @@ function App() {
 
                 </div>
             </Router>
+            <Footer/>
 
 
         </>

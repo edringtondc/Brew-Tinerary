@@ -112,7 +112,7 @@ export default class Itinerary extends React.Component {
         API.saveBreweries(this.state.savedList)
             .then(function (res) {
                 console.log("Save Breweries.then")
-                // console.log(res)
+                console.log(res)
             })
 
     }
@@ -126,95 +126,6 @@ export default class Itinerary extends React.Component {
         this.setState({ breweryList: breweries })
 
     }
-
-    onDragStart = () => {
-        document.body.style.color = "orange"
-        document.body.style.transition = 'black'
-    }
-
-    onDragUpdate = update => {
-        const { destination } = update;
-        const opacity = destination
-            ? destination.index / Object.keys(this.state.initialData.tasks).length
-            : 0;
-        document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`
-
-    }
-
-    onDragEnd = result => {
-        document.body.style.color = "inherit"
-        //TODO: reorder our column
-
-        const { destination, source, draggableId } = result;
-        if (!destination) {
-            return;
-        }
-        if (destination.droppableId === source.droppableId &&
-            destination.index === source.index) {
-            return;
-        }
-
-        const start = this.state.initialData.columns[source.droppableId];
-        const finish = this.state.initialData.columns[destination.droppableId]
-
-        if (start === finish) {
-
-            const newTaskIds = Array.from(start.taskIds);
-            //order the array
-            newTaskIds.splice(source.index, 1);
-            newTaskIds.splice(destination.index, 0, draggableId)
-
-            const newColumn = {
-                ...start,
-                taskIds: newTaskIds,
-            }
-
-            const newState = {
-                ...this.state.initialData,
-                columns: {
-                    ...this.state.initialData.columns,
-                    [newColumn.id]: newColumn,
-                },
-            };
-            this.setState(newState);
-            return;
-            //call an update after the set state to tell server an update has occured
-        }
-
-        const startTasksIds = Array.from(start.taskIds);
-        startTasksIds.splice(source.index, 1);
-
-        const newStart = {
-            ...start,
-            taskIds: startTasksIds,
-        };
-
-        const finishTaskIds = Array.from(finish.taskIds);
-        finishTaskIds.splice(destination.index, 0, draggableId);
-
-        const newFinish = {
-            ...finish,
-            taskIds: finishTaskIds
-        };
-
-        const newState = {
-            ...this.state.initialData,
-            columns: {
-                ...this.state.initialData.columns,
-                [newStart.id]: newStart,
-                [newFinish.id]: newFinish,
-            },
-        };
-        this.setState(newState);
-    }
-
-    //take this.state.result - when data comes back
-    //loop through and get geocoded information (promise.all)
-    //when that comes back. update the pushpins, and then 
-    //render to the map once we have all the push pin info
-
-
-
 
 
     searchBreweries = query => {
@@ -274,8 +185,8 @@ export default class Itinerary extends React.Component {
         return (
 
             <>
-                <Container >
-                    <Row>
+                <Container className="container m-2" >
+                    <Row className="m-2 p-2">
                         <Col md={8}>
                             <MapContainer
                                 google={this.state.search}
@@ -291,9 +202,9 @@ export default class Itinerary extends React.Component {
                             <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>
 
 
-                            <PerfectScrollbar>
+                    
 
-                                <Container>
+                                <Container >
 
 
                                     {this.state.result.length ? (
@@ -321,7 +232,7 @@ export default class Itinerary extends React.Component {
                                         )}
                                 </Container>
 
-                            </PerfectScrollbar>
+                        
                         </Col>
 
                     </Row>

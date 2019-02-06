@@ -30,7 +30,7 @@ const Main = () => {
             <Itinerary/>
         
         </Wrapper>
-        <Footer/>
+  
        
    
         </>
