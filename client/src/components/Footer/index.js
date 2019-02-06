@@ -1,18 +1,23 @@
 import React from "react"
-// import styled from "styled-components";
+import styled from "styled-components";
 
-
+const FooterDiv = styled.div`
+    position: fixed
+    bottom: 0
+    
+    width: 100%
+`;
 
 function Footer() {
 
     return (
 
         <>
-            <footer className="footer">
+            <FooterDiv className="footer bg-dark mt-3">
                 <div className="container">
-                    <span className="text-muted">Place sticky footer content here.</span>
+                    <span className="text-muted">Brought to you by Elisabeth Edrington and Tiffiany Cuneo</span>
                 </div>
-            </footer>
+            </FooterDiv>
         </>
     )
 

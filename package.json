@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "11.0.0"
+  },
   "scripts": {
+
     "start": "if-env NODE_ENV=production && yarn run start:prod || yarn run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"yarn run client\"",
@@ -11,8 +15,11 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install",
     "build": "cd client && yarn run build",
-    "heroku-postbuild": "yarn run build"
+    "heroku-prebuild": "yarn install --production=false",
+    "heroku-postbuild": "yarn run build", 
+    "web": "npm start:prod"
   },
+
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -24,6 +31,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "if-env": "^1.0.4",
-    "mongoose": "^5.3.16"
+    "mongoose": "^5.3.16",
+    "react-bootstrap": "^1.0.0-beta.5"
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import initialData from "../../initial-data";
-import PerfectScrollbar from 'react-perfect-scrollbar';
+
 import Search from "../Search";
 import SaveButton from "../Buttons"
 import BreweryListItem from "../BreweryListItem"
@@ -28,6 +28,11 @@ export default class Itinerary extends React.Component {
         savedList: [],
         locations: [],
         mapPins: [],
+        searchLatLong: {},
+        mapCenter: {
+            lat: 39.7392,
+            lng: -104.9903,
+          },
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -66,16 +71,22 @@ export default class Itinerary extends React.Component {
                 console.log("Geo Code", res)
                 const locations = res.data
 
-                this.setState({ locations: locations }, () => {
+                console.log(res.data)
+                this.setState({ locations: [...this.state.locations, locations.results[0]] }, () => {
+
                     // console.log("state: ", this.state.locations)
 
                     // console.log(this.state.locations.results[0].geometry.location)
 
-                    const lat = Number(this.state.locations.results[0].geometry.location.lat)
-                    const lng = Number(this.state.locations.results[0].geometry.location.lng)
+                    const newLocations = this.state.locations.map(location => {
+                        return location.geometry.location
+
+                    })
 
 
-                    this.makePins(lat, lng, "test")
+                    this.setState({ mapPins: newLocations })
+
+
 
                     // for (let i = 0; i < this.state.locations.length; i++) {
                     //     const lat = this.state.locations[i].results[0].geometry.location.lat
@@ -90,21 +101,6 @@ export default class Itinerary extends React.Component {
             .catch(err => console.log(err));
     };
 
-    makePins = (lat, lng, name) => {
-        console.log("lat " + lat)
-        console.log("lng " + lng)
-
-
-
-
-
-        // const newPin = {lat, lng, name}
-        // const newMapPins = this.state.mapPins
-
-        // newMapPins.push(newPin)
-        // this.setState({mapPins: newMapPins})
-
-    }
 
     saveBreweries = () => {
         console.log("saveBreweries called")
@@ -112,7 +108,7 @@ export default class Itinerary extends React.Component {
         API.saveBreweries(this.state.savedList)
             .then(function (res) {
                 console.log("Save Breweries.then")
-                // console.log(res)
+                console.log(res)
             })
 
     }
@@ -126,95 +122,6 @@ export default class Itinerary extends React.Component {
         this.setState({ breweryList: breweries })
 
     }
-
-    onDragStart = () => {
-        document.body.style.color = "orange"
-        document.body.style.transition = 'black'
-    }
-
-    onDragUpdate = update => {
-        const { destination } = update;
-        const opacity = destination
-            ? destination.index / Object.keys(this.state.initialData.tasks).length
-            : 0;
-        document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`
-
-    }
-
-    onDragEnd = result => {
-        document.body.style.color = "inherit"
-        //TODO: reorder our column
-
-        const { destination, source, draggableId } = result;
-        if (!destination) {
-            return;
-        }
-        if (destination.droppableId === source.droppableId &&
-            destination.index === source.index) {
-            return;
-        }
-
-        const start = this.state.initialData.columns[source.droppableId];
-        const finish = this.state.initialData.columns[destination.droppableId]
-
-        if (start === finish) {
-
-            const newTaskIds = Array.from(start.taskIds);
-            //order the array
-            newTaskIds.splice(source.index, 1);
-            newTaskIds.splice(destination.index, 0, draggableId)
-
-            const newColumn = {
-                ...start,
-                taskIds: newTaskIds,
-            }
-
-            const newState = {
-                ...this.state.initialData,
-                columns: {
-                    ...this.state.initialData.columns,
-                    [newColumn.id]: newColumn,
-                },
-            };
-            this.setState(newState);
-            return;
-            //call an update after the set state to tell server an update has occured
-        }
-
-        const startTasksIds = Array.from(start.taskIds);
-        startTasksIds.splice(source.index, 1);
-
-        const newStart = {
-            ...start,
-            taskIds: startTasksIds,
-        };
-
-        const finishTaskIds = Array.from(finish.taskIds);
-        finishTaskIds.splice(destination.index, 0, draggableId);
-
-        const newFinish = {
-            ...finish,
-            taskIds: finishTaskIds
-        };
-
-        const newState = {
-            ...this.state.initialData,
-            columns: {
-                ...this.state.initialData.columns,
-                [newStart.id]: newStart,
-                [newFinish.id]: newFinish,
-            },
-        };
-        this.setState(newState);
-    }
-
-    //take this.state.result - when data comes back
-    //loop through and get geocoded information (promise.all)
-    //when that comes back. update the pushpins, and then 
-    //render to the map once we have all the push pin info
-
-
-
 
 
     searchBreweries = query => {
@@ -232,19 +139,31 @@ export default class Itinerary extends React.Component {
     };
 
     handleInputChange = event => {
-        const { name, value } = event.target
-        this.setState({
-            [name]: value
-        })
+        const { value } = event.target
+        if (value !== "") {
+            this.setState({
+                search: value
+            })
+        }
+
 
     }
 
     handleSubmit = event => {
         event.preventDefault();
+   
+
+        API.geoCode(this.state.search)
+            .then(res => {
+                console.log("Map geo", res)
+                this.setState({ mapCenter: res.data.results[0].geometry.location })
+
+            })
 
         console.log("submitted")
         console.log("state", this.state.result)
         this.searchBreweries(this.state.search);
+
 
     }
 
@@ -265,20 +184,21 @@ export default class Itinerary extends React.Component {
 
 
     }
-
-
-
+    
 
 
     render() {
         return (
 
             <>
-                <Container >
-                    <Row>
+                <Container className="container m-2" >
+                    <Row className="m-2 p-2">
                         <Col md={8}>
                             <MapContainer
                                 google={this.state.search}
+                                mapPins={this.state.mapPins}
+                                center={this.state.mapCenter}
+
                             />
                         </Col>
                         <Col md={4}>
@@ -287,41 +207,43 @@ export default class Itinerary extends React.Component {
                                 value={this.state.search}
                                 handleInputChange={this.handleInputChange}
                                 handleSubmit={this.handleSubmit}
+                               
+
                             />
                             <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>
 
 
-                            <PerfectScrollbar>
-
-                                <Container>
 
 
-                                    {this.state.result.length ? (
-                                        <div >
-                                            {this.state.breweryList.map(brewery => (
+                            <Container >
 
-                                                <BreweryListItem
-                                                    key={brewery.id}
-                                                    name={brewery.name}
-                                                    street={brewery.street}
-                                                    state={brewery.state}
-                                                    city={brewery.city}
-                                                    url={brewery.url}
-                                                    status={brewery.status}
-                                                    handleSave={this.handleSave}
-                                                    id={brewery.id}
-                                                >
-                                                </BreweryListItem>
-                                            ))}
 
-                                        </div>
-                                        //button with Link with to=...
-                                    ) : (
-                                            <h3>No Results to Display</h3>
-                                        )}
-                                </Container>
+                                {this.state.result.length ? (
+                                    <div >
+                                        {this.state.breweryList.map(brewery => (
 
-                            </PerfectScrollbar>
+                                            <BreweryListItem
+                                                key={brewery.id}
+                                                name={brewery.name}
+                                                street={brewery.street}
+                                                state={brewery.state}
+                                                city={brewery.city}
+                                                url={brewery.url}
+                                                status={brewery.status}
+                                                handleSave={this.handleSave}
+                                                id={brewery.id}
+                                            >
+                                            </BreweryListItem>
+                                        ))}
+
+                                    </div>
+                                    //button with Link with to=...
+                                ) : (
+                                        <h3>No Results to Display</h3>
+                                    )}
+                            </Container>
+
+
                         </Col>
 
                     </Row>

@@ -77,7 +77,7 @@ class NavBar extends React.Component {
                 <NavLink href="/saved" style={this.style}>My Itineraries</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/login" style={this.style}>LogIn</NavLink>
+                <NavLink href="/Login" style={this.style}>LogIn</NavLink>
               </NavItem>
 
               <UncontrolledDropdown nav inNavbar >
