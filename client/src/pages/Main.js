@@ -1,6 +1,6 @@
 import React from 'react';
 import Itinerary from "../components/Itinerary"
-// import Footer from "../components/Footer"
+import Footer from "../components/Footer"
 import NavBar from "../components/NavBar"
 import styled from "styled-components";
 
@@ -23,9 +23,10 @@ const Main = () => {
     return (
         <>
         <NavBar/>
-     {/* <CarouselPics/> */}
-
+{/*    
+        <CarouselPics/> */}
         <Wrapper>
+       
        
             <Itinerary/>
         

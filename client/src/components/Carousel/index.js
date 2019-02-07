@@ -16,8 +16,8 @@ let images = [
 const CarouselPics = () => (
     <div className="myCarousel">
         <Carousel images={images}
-            // thumb={true}
-            loop={true}
+            thumb={true}
+            loop={false}
             autoplay={3000} />
     </div>
 )

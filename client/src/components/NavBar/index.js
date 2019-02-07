@@ -1,5 +1,5 @@
 import React from 'react';
-// import styled from "styled-components";
+import styled from "styled-components";
 import axios from "axios"
 import {
   Collapse,
@@ -14,6 +14,12 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+
+// const Icon = styled.img`
+//   width = 50px
+//   height = 50px
+//   margin: 10px
+// `;
 
 class NavBar extends React.Component {
   style = {
@@ -65,7 +71,7 @@ class NavBar extends React.Component {
 
 
           <NavbarBrand href="/" style={this.style}> 
-            <img src="../../assets/RFclipart-63304.jpg" width="30" height="30" alt="" />
+            <img className="mr-2" src="../../assets/RFclipart-63304.jpg" width="30" height="30" alt="" />
           BrewTinerary</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -80,7 +86,7 @@ class NavBar extends React.Component {
                 <NavLink href="/Login" style={this.style}>LogIn</NavLink>
               </NavItem>
 
-              <UncontrolledDropdown nav inNavbar >
+              {/* <UncontrolledDropdown nav inNavbar >
                 <DropdownToggle nav caret style={this.style}>
                   Options
                 </DropdownToggle>
@@ -96,7 +102,7 @@ class NavBar extends React.Component {
                     Reset
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
         </Navbar>

@@ -7,6 +7,7 @@ import { Container } from 'reactstrap';
 
 
 
+
 class Saved extends Component {
     state = {
         savedBreweries: []
@@ -48,7 +49,7 @@ class Saved extends Component {
             <>
                 <NavBar />
 
-                <Container >
+                <Container  >
                     {this.state.savedBreweries.length ? (
                         <div >
                             {this.state.savedBreweries.map(brewery => (
@@ -56,11 +57,11 @@ class Saved extends Component {
                                 <BreweryListItem
                                 key={brewery.id}
                                 name={brewery.name}
-                                street={"Street"}
-                                state={"state"}
-                                city={"city"}
+                                street={brewery.street}
+                                state={brewery.state}
+                                city={brewery.city}
                                 url={brewery.url}
-                                status={"status"}
+                                status={brewery.status}
                                 handleSave={"handleSave"}
                                 id={brewery.id}
                                 >
