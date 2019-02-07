@@ -3,7 +3,8 @@ const db = require("../models");
 // Defining methods for the booksController
 module.exports = {
   findAll: function (req, res) {
-    console.log("in find all")
+    console.log("in find all", req.body)
+    
     db.Brewery
       .find()
       .then(dbModel => res.json(dbModel))
@@ -32,7 +33,7 @@ module.exports = {
     })
     console.log("id array: ", idArray)
     db.Brewery
-      .insertMany(idArray)
+      .insertMany(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
     //passing it an array, change it to handle multiple documents at once - insert many and then send one response

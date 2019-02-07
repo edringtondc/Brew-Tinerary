@@ -145,12 +145,15 @@ export default class Itinerary extends React.Component {
     }
 
 
-    handleSave = (id) => {
+    handleSave = (id, url, name) => {
         console.log("Saved: " + id)
         let savedID = id;
+        let savedName = name
+        let savedUrl = url
+
         var newStateArray = this.state.savedList.slice();
 
-        newStateArray.push(savedID);
+        newStateArray.push({id: savedID, name: savedName, url: savedUrl });
 
         this.setState({ savedList: newStateArray });
         //need to save other data

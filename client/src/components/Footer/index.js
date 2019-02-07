@@ -1,4 +1,5 @@
 import React from "react"
+import { Col, Row, } from 'reactstrap';
 import styled from "styled-components";
 
 const FooterDiv = styled.div`
@@ -15,8 +16,13 @@ function Footer() {
         <>
             <FooterDiv className="footer bg-dark mt-3">
                 <div className="container">
-                    <span className="text-muted">Brought to you by Elisabeth Edrington and Tiffiany Cuneo</span>
-                </div>
+                    <Row className="d-flex justify-content-center">
+                        <span className="text-muted">Brought to you by <a href="https://www.elisabethedrington.com" target="_blank">Elisabeth Edrington</a> and Tiffiany Cuneo</span>
+                    </Row>
+                    <Row className="d-flex justify-content-center">
+                        <a href="">GitHub Repository</a>
+                    </Row>     
+                    </div>
             </FooterDiv>
         </>
     )

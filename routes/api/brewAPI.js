@@ -1,5 +1,5 @@
 const axios = require('axios');
-// const keys = require("../../keys.js")
+const keys = require("../../keys.js")
 var express = require('express')
 const router = require("express").Router();
 const brewController = require("../../controllers/brewerycontrollers")
@@ -7,13 +7,13 @@ const brewController = require("../../controllers/brewerycontrollers")
 
 
 const BASEURL = "http://beermapping.com/webservice/loccity/";
-// const APIKEY = keys.beerMapping
-const APIKEY = process.env.BeerMapping
+const APIKEY = "1e85b90225089a51575fe3432c04261e/"
+// const APIKEY = keys.BeerMapping
 
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
-// const geoKey = "&key=" + keys.google
-const geoKey = "&key=" + process.env.Google
+const geoKey = "&key=AIzaSyA7UZmTHAMl9HcH5nUwa7kJixTYgwWKr4Q" 
+// const geoKey = "&key=" + keys.Google
 
 
 
