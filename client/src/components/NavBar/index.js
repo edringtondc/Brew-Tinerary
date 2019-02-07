@@ -55,7 +55,7 @@ class NavBar extends React.Component {
 
   render() {
 
-    const loggedIn = this.props.loggedIn;
+    // const loggedIn = this.props.loggedIn;
     console.log('navbar render, props: ')
     console.log(this.props);
 
@@ -64,9 +64,9 @@ class NavBar extends React.Component {
         <Navbar color="dark" light expand="md" >
 
 
-          <NavbarBrand href="/" style={this.style}>  <a className="navbar-brand" href="#">
+          <NavbarBrand href="/" style={this.style}> 
             <img src="../../assets/RFclipart-63304.jpg" width="30" height="30" alt="" />
-          </a>BrewTinerary</NavbarBrand>
+          BrewTinerary</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

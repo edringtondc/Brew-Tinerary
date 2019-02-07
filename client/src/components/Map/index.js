@@ -1,7 +1,7 @@
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import React, { Component } from "react";
 // import Pin from "./marker"
-import API from "../../utils/API.js"
+// import API from "../../utils/API.js"
 
 
 export class MapContainer extends Component {
@@ -64,7 +64,7 @@ export class MapContainer extends Component {
     console.log(this.state.selectedPlace);
   }
 
-  
+  // 
 
   render() {
     return (

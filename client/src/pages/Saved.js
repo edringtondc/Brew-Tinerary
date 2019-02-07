@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from "../components/NavBar"
 import API from "../utils/API"
 import BreweryListItem from "../components/BreweryListItem"
-import { Col, Row, Container } from 'reactstrap';
+import { Container } from 'reactstrap';
 // import styled from "styled-components";
 
 
