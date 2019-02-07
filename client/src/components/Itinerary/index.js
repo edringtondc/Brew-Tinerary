@@ -1,19 +1,19 @@
 import React from 'react';
 import initialData from "../../initial-data";
-
 import Search from "../Search";
 import SaveButton from "../Buttons"
 import BreweryListItem from "../BreweryListItem"
-
-
 import MapContainer from "../Map";
-
 import { Col, Row, Container } from 'reactstrap';
 // import { DragDropContext } from "react-beautiful-dnd";
 import "@atlaskit/css-reset";
-// import styled from "styled-components";
+import styled from "styled-components";
 import API from "../../utils/API.js"
 
+const MainContent = styled.div`
+    margin: 10px
+    height 90%
+`;
 
 
 
@@ -36,7 +36,7 @@ export default class Itinerary extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // Typical usage (don't forget to compare props):
+      
 
         if (this.state.result !== prevState.result) {
             var addressArray = []
@@ -68,39 +68,25 @@ export default class Itinerary extends React.Component {
 
         API.geoCode(query)
             .then(res => {
-                console.log("Geo Code", res)
+                // console.log("Geo Code", res)
                 const locations = res.data
 
-                console.log(res.data)
+                // console.log(res.data)
                 this.setState({ locations: [...this.state.locations, locations.results[0]] }, () => {
 
-                    // console.log("state: ", this.state.locations)
-
-                    // console.log(this.state.locations.results[0].geometry.location)
-
+               
                     const newLocations = this.state.locations.map(location => {
                         return location.geometry.location
 
                     })
 
-
                     this.setState({ mapPins: newLocations })
-
-
-
-                    // for (let i = 0; i < this.state.locations.length; i++) {
-                    //     const lat = this.state.locations[i].results[0].geometry.location.lat
-                    //     const lng = this.state.locations[i].results[0].geometry.location.lng
-                    //     console.log("in for loop")
-                    //     this.makePins(lat, lng)
-                    // }
 
                 })
 
             })
             .catch(err => console.log(err));
     };
-
 
     saveBreweries = () => {
         console.log("saveBreweries called")
@@ -114,9 +100,6 @@ export default class Itinerary extends React.Component {
     }
 
     breweryOnly = () => {
-
-        // const status = this.state.result
-        // console.log(status)
 
         const breweries = this.state.result.filter(locations => locations.status === "Brewery" || locations.status === "Brewpub").slice(0, 10)
         this.setState({ breweryList: breweries })
@@ -145,26 +128,20 @@ export default class Itinerary extends React.Component {
                 search: value
             })
         }
-
-
     }
 
     handleSubmit = event => {
         event.preventDefault();
-   
 
         API.geoCode(this.state.search)
             .then(res => {
                 console.log("Map geo", res)
                 this.setState({ mapCenter: res.data.results[0].geometry.location })
-
             })
 
         console.log("submitted")
         console.log("state", this.state.result)
         this.searchBreweries(this.state.search);
-
-
     }
 
 
@@ -182,23 +159,19 @@ export default class Itinerary extends React.Component {
             .then(data => console.log(data))
             .catch(err => console.log(err))
 
-
     }
     
-
-
     render() {
         return (
-
             <>
                 <Container className="container m-2" >
+                <MainContent>
                     <Row className="m-2 p-2">
                         <Col md={8}>
                             <MapContainer
                                 google={this.state.search}
                                 mapPins={this.state.mapPins}
                                 center={this.state.mapCenter}
-
                             />
                         </Col>
                         <Col md={4}>
@@ -207,17 +180,10 @@ export default class Itinerary extends React.Component {
                                 value={this.state.search}
                                 handleInputChange={this.handleInputChange}
                                 handleSubmit={this.handleSubmit}
-                               
-
                             />
                             <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>
 
-
-
-
                             <Container >
-
-
                                 {this.state.result.length ? (
                                     <div >
                                         {this.state.breweryList.map(brewery => (
@@ -235,48 +201,19 @@ export default class Itinerary extends React.Component {
                                             >
                                             </BreweryListItem>
                                         ))}
-
                                     </div>
                                     //button with Link with to=...
                                 ) : (
                                         <h3>No Results to Display</h3>
                                     )}
                             </Container>
-
-
                         </Col>
-
                     </Row>
-
-
-
+                    </MainContent>
                 </Container>
 
-
-
-
-
-
-
-
-                {/* <DragDropContext
-                    onDragEnd={this.onDragEnd}
-                    onDragStart={this.onDragStart}
-                    onDragUpdate={this.onDragUpdate}
-                >
-                    <Container>
-
-                        {this.state.initialData.columnOrder.map(columnId => {
-                            const column = this.state.initialData.columns[columnId];
-                            const tasks = column.taskIds.map(taskId => this.state.initialData.tasks[taskId]);
-
-                            return <Column key={column.id} column={column} tasks={tasks} />
-                        })}
-                    </Container>
-                </DragDropContext> */}
             </>
         );
-
 
     }
 }

@@ -64,6 +64,8 @@ export class MapContainer extends Component {
     console.log(this.state.selectedPlace);
   }
 
+  
+
   render() {
     return (
 

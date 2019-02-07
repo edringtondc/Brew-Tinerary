@@ -4,7 +4,7 @@ import styled from "styled-components";
 const FooterDiv = styled.div`
     position: fixed
     bottom: 0
-    
+    height: 50px
     width: 100%
 `;
 
