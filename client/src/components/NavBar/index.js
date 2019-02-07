@@ -71,7 +71,7 @@ class NavBar extends React.Component {
 
 
           <NavbarBrand href="/" style={this.style}> 
-            <img className="mr-2" src="../../assets/RFclipart-63304.jpg" width="30" height="30" alt="" />
+            {/* <img className="mr-2" src="../../assets/RFclipart-63304.jpg" width="30" height="30" alt="" /> */}
           BrewTinerary</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>

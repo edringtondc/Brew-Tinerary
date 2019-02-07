@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 
 
-// import CarouselPics from "../components/Carousel"
+import CarouselPics from "../components/Carousel"
 
 
 
@@ -23,8 +23,8 @@ const Main = () => {
     return (
         <>
         <NavBar/>
-{/*    
-        <CarouselPics/> */}
+
+        <CarouselPics/> 
         <Wrapper>
        
        

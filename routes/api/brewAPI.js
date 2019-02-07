@@ -8,7 +8,7 @@ const brewController = require("../../controllers/brewerycontrollers")
 
 const BASEURL = "http://beermapping.com/webservice/loccity/";
 const APIKEY = process.env.BeerMapping
-// const APIKEY =
+// const APIKEY 
 
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
