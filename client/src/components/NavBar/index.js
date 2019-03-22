@@ -21,6 +21,11 @@ import {
 //   margin: 10px
 // `;
 
+const StyledNav = styled(Navbar)`
+  
+`;
+
+
 class NavBar extends React.Component {
   style = {
     color: "#f4be41"
@@ -67,7 +72,7 @@ class NavBar extends React.Component {
 
     return (
       <div>
-        <Navbar color="dark" light expand="md" >
+        <StyledNav color="dark" light expand="md" >
 
 
           <NavbarBrand href="/" style={this.style}> 
@@ -105,7 +110,7 @@ class NavBar extends React.Component {
               </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
-        </Navbar>
+        </StyledNav>
       </div>
     );
   }

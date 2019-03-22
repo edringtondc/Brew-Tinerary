@@ -10,11 +10,21 @@ import "@atlaskit/css-reset";
 import styled from "styled-components";
 import API from "../../utils/API.js"
 
+
+
+
 const MainContent = styled.div`
     margin: 10px
     height 90%
 `;
 
+const ListContainer = styled(Container)`
+    border-style: solid 1px grey;
+    height: 350px
+    margin: 0 auto;
+    width: 350px;
+    overflow-y: scroll;
+`;
 
 
 
@@ -32,11 +42,11 @@ export default class Itinerary extends React.Component {
         mapCenter: {
             lat: 39.7392,
             lng: -104.9903,
-          },
+        },
     }
 
     componentDidUpdate(prevProps, prevState) {
-      
+
 
         if (this.state.result !== prevState.result) {
             var addressArray = []
@@ -74,7 +84,7 @@ export default class Itinerary extends React.Component {
                 // console.log(res.data)
                 this.setState({ locations: [...this.state.locations, locations.results[0]] }, () => {
 
-               
+
                     const newLocations = this.state.locations.map(location => {
                         return location.geometry.location
 
@@ -145,20 +155,21 @@ export default class Itinerary extends React.Component {
     }
 
 
-    handleSave = (id, url, name, status, street,  city, state, ) => {
+    handleSave = (id, url, name, status, street, city, state, ) => {
         console.log("Saved: " + id)
-       
+
 
         var newStateArray = this.state.savedList.slice();
 
         newStateArray.push({
-            id: id, 
-            name: name, 
-            url: url, 
-            status: status, 
-            street: street, 
-            city: city, 
-            state: state });
+            id: id,
+            name: name,
+            url: url,
+            status: status,
+            street: street,
+            city: city,
+            state: state
+        });
 
         this.setState({ savedList: newStateArray });
         //need to save other data
@@ -168,56 +179,63 @@ export default class Itinerary extends React.Component {
             .catch(err => console.log(err))
 
     }
-    
+
     render() {
         return (
             <>
                 <Container className="container m-2" >
-                <MainContent>
-                    <Row className="m-2 p-2">
+                    <MainContent>
+                        <Row className="m-2 p-2">
+
+                        <Search
+                                    value={this.state.search}
+                                    handleInputChange={this.handleInputChange}
+                                    handleSubmit={this.handleSubmit}
+                                />
+                        </Row>
+                        <Row className="m-2 p-2">
                         <Col md={8}>
-                            <MapContainer
-                                google={this.state.search}
-                                mapPins={this.state.mapPins}
-                                center={this.state.mapCenter}
-                            />
+                                <MapContainer
+                                    google={this.state.search}
+                                    mapPins={this.state.mapPins}
+                                    center={this.state.mapCenter}
+                                />
                         </Col>
-                        <Col md={4}>
+                            <Col md={4}>
 
-                            <Search
-                                value={this.state.search}
-                                handleInputChange={this.handleInputChange}
-                                handleSubmit={this.handleSubmit}
-                            />
-                            <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>
+                              <h4>Results: </h4>
 
-                            <Container >
-                                {this.state.result.length ? (
-                                    <div >
-                                        {this.state.breweryList.map(brewery => (
+                                <ListContainer >
+                        
+                                    {this.state.result.length ? (
+                                        <div >
+                                            {this.state.breweryList.map(brewery => (
 
-                                            <BreweryListItem
-                                                key={brewery.id}
-                                                name={brewery.name}
-                                                street={brewery.street}
-                                                state={brewery.state}
-                                                city={brewery.city}
-                                                url={brewery.url}
-                                                status={brewery.status}
-                                                handleSave={this.handleSave}
-                                                id={brewery.id}
-                                            >
-                                            </BreweryListItem>
-                                        ))}
-                                    </div>
-                                    //button with Link with to=...
-                                ) : (
-                                        <h3>No Results to Display</h3>
-                                    )}
-                            </Container>
-                        </Col>
-                    </Row>
+                                                <BreweryListItem
+                                                    key={brewery.id}
+                                                    name={brewery.name}
+                                                    street={brewery.street}
+                                                    state={brewery.state}
+                                                    city={brewery.city}
+                                                    url={brewery.url}
+                                                    status={brewery.status}
+                                                    handleSave={this.handleSave}
+                                                    id={brewery.id}
+                                                >
+                                                </BreweryListItem>
+                                            ))}
+                                        </div>
+                                        //button with Link with to=...
+                                    ) : (
+                                            <h3>No Results to Display</h3>
+                                        )}
+                                  
+                                </ListContainer>
+                                <div className="d-flex justify-content-center"><SaveButton saveBreweries={this.saveBreweries} /></div>
+                            </Col>
+                        </Row>
                     </MainContent>
+
                 </Container>
 
             </>

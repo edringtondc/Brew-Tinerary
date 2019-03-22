@@ -17,7 +17,7 @@ function Footer() {
             <FooterDiv className="footer bg-dark mt-3">
                 <div className="container">
                     <Row className="d-flex justify-content-center">
-                        <span className="text-muted">Brought to you by <a href="https://www.elisabethedrington.com" rel="noopener noreferrer" target="_blank">Elisabeth Edrington</a> and Tiffiany Cuneo</span>
+                        <span className="text-muted">Brought to you by <a href="https://www.elisabethedrington.com" rel="noopener noreferrer" target="_blank">Elisabeth Edrington</a> and <a href="https://www.linkedin.com/in/tiffany-cuneo/">Tiffiany Cuneo</a></span>
                     </Row>
                     <Row className="d-flex justify-content-center">
                         <a href="https://github.com/edringtondc/Brew-Tinerary">GitHub Repository</a>

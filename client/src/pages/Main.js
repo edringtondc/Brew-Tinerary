@@ -6,15 +6,17 @@ import styled from "styled-components";
 
 
 
+
 import CarouselPics from "../components/Carousel"
 
-
+ // background-image: url("./assets/beerbubbles.jpg");
 
 const Wrapper = styled.div`
-    height: 100%
-    margin: 10px
-    
-   
+    height: 800px;
+    width: 100%;
+    background-color: whitesmoke;
+
+  
 `;
 
 const Main = () => {
@@ -24,7 +26,7 @@ const Main = () => {
         <>
         <NavBar/>
 
-        <CarouselPics/> 
+   <CarouselPics></CarouselPics>
         <Wrapper>
        
        

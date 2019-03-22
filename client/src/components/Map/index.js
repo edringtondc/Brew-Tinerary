@@ -20,7 +20,7 @@ export class MapContainer extends Component {
 
   style = {
     width: "95%",
-    height: 500,
+    height: 450,
   }
 
   // componentDidUpdate(prevProps, prevState) {
