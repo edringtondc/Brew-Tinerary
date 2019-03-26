@@ -7,12 +7,12 @@ const brewController = require("../../controllers/brewerycontrollers")
 
 
 const BASEURL = "http://beermapping.com/webservice/loccity/";
-const APIKEY = "1e85b90225089a51575fe3432c04261e/"
+// const APIKEY = 
 // const APIKEY 
 
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
-const geoKey = "&key=" + "AIzaSyDAF0hELme6xtzcJwHWCqTS9sstTg_ilgk"
+// const geoKey = 
 // const geoKey = "&key=" + 
 
 
