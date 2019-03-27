@@ -49,6 +49,11 @@ add-px-to-style@1.0.0:
   resolved "https://registry.yarnpkg.com/add-px-to-style/-/add-px-to-style-1.0.0.tgz#d0c135441fa8014a8137904531096f67f28f263a"
   integrity sha1-0ME1RB+oAUqBN5BFMQlvZ/KPJjo=
 
+animate-css-styled-components@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/animate-css-styled-components/-/animate-css-styled-components-1.0.2.tgz#0714fa22d9beac8fa09ab3d668851de6c01ad361"
+  integrity sha512-kIU1lNSJaz6kGQv5bdWGJeuBSdQsNhWV+54SXzf9CDF50lK7JwuvhrO0AJ5RjdOFwQC/rUV8oKlPznURs8xhOA==
+
 ansi-align@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-2.0.0.tgz#c36aeccba563b89ceb556f3690f0b1d9e3547f7f"
