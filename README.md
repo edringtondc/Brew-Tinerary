@@ -4,15 +4,15 @@ This web app lets you search for a brewery in a given locatoin. You can then sav
 
 ## Getting Started
 
+* Obtain API keys from both [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/start) and [BreweryDB](https://www.brewerydb.com/developers)
 
+ * add a .env file
+ ```
+ Google=yourkeyhere
 
-### Prerequisites
+ BeerMapping=yourkeyhere/
+ ```
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
 
 ### Installing
 
