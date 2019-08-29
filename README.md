@@ -1,8 +1,10 @@
 # BrewTinerary
 
-This web app lets you search for a brewery in a given locatoin. You can then save the brewery to your itinerary to organize your brewery hop! 
+This web app lets you search for a brewery in a given location. You can then save the brewery to your itinerary to organize your brewery hop! 
 
 ## Getting Started
+
+
 
 * Obtain API keys from both [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/start) and [BreweryDB](https://www.brewerydb.com/developers)
 
@@ -14,7 +16,7 @@ This web app lets you search for a brewery in a given locatoin. You can then sav
  ```
 
 
-### Installing
+## Installing
 
 A step by step series of examples that tell you how to get a development env running
 
