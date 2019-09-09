@@ -191,6 +191,7 @@ export default class Itinerary extends React.Component {
                                     value={this.state.search}
                                     handleInputChange={this.handleInputChange}
                                     handleSubmit={this.handleSubmit}
+                            
                                 />
                         </Row>
                         <Row className="m-2 p-2">
@@ -221,6 +222,7 @@ export default class Itinerary extends React.Component {
                                                     status={brewery.status}
                                                     handleSave={this.handleSave}
                                                     id={brewery.id}
+                                                    saved={false}
                                                 >
                                                 </BreweryListItem>
                                             ))}

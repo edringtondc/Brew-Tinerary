@@ -19,15 +19,28 @@ class Saved extends Component {
         this.loadSavedBreweries()
 
     }
+    
+
+    handleDelete = (_id) => {
+        API.deleteBrewery(_id)
+        .then(res => {
+            console.log("deleted " , _id)
+            this.loadSavedBreweries();
+        })
+        .catch(err => console.log("error", err));
+    }
 
 
 
     loadSavedBreweries = () => {
         API.getAllSaved()
             .then(res => {
+
+
                 console.log("res ", res.data)
 
                 const newSaved = this.state.savedBreweries.slice()
+
                 res.data.forEach(saved=>{
                     newSaved.push(saved)
                 })
@@ -55,15 +68,17 @@ class Saved extends Component {
                             {this.state.savedBreweries.map(brewery => (
 
                                 <BreweryListItem
-                                key={brewery.id}
+                                key={brewery._id}
                                 name={brewery.name}
                                 street={brewery.street}
                                 state={brewery.state}
                                 city={brewery.city}
                                 url={brewery.url}
                                 status={brewery.status}
-                                handleSave={"handleSave"}
+                                handleDelete={()=>this.handleDelete(brewery._id)}
                                 id={brewery.id}
+                                _id={brewery._id}
+                                saved={true}
                                 >
                                 </BreweryListItem>
                             ))}
