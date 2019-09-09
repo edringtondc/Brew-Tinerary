@@ -8,12 +8,12 @@ const brewController = require("../../controllers/brewerycontrollers")
 
 const BASEURL = "http://beermapping.com/webservice/loccity/";
 const APIKEY = process.env.BeerMapping
-// const APIKEY 
+// const APIKEY = ""
 
 
 const geoURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
 const geoKey = "&key=" + process.env.Google
-// const geoKey = "&key=" + 
+// const geoKey = "&key=" + ""
 
 
 
@@ -50,10 +50,13 @@ router.get("/geocode", function (req, res) {
       if (err) { console.log(err) }
     })
 })
-
+ 
+router.route('/brewery/:id')
+  .delete(brewController.remove)
 
 //actual post /api/breweryAPI/saved
-router.route("/saved").post(brewController.createMany)
+router.route("/saved")
+  .post(brewController.createMany)
 // /api.breweryAPI/savedAll
 
 router.route("/savedAll")
