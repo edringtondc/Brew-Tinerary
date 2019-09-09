@@ -25,7 +25,8 @@ class Saved extends Component {
         API.deleteBrewery(_id)
         .then(res => {
             console.log("deleted " , _id)
-            this.loadSavedBreweries();
+            this.loadSavedBreweries()
+            
         })
         .catch(err => console.log("error", err));
     }
@@ -39,14 +40,17 @@ class Saved extends Component {
 
                 console.log("res ", res.data)
 
-                const newSaved = this.state.savedBreweries.slice()
+                // const newSaved = this.state.savedBreweries.slice()
 
-                res.data.forEach(saved=>{
-                    newSaved.push(saved)
-                })
+                // res.data.forEach(saved=>{
+                //     newSaved.push(saved)
+                // })
+                // this.setState({savedBreweries: newSaved})
+
+                this.setState({savedBreweries: res.data})
                 
 
-                this.setState({savedBreweries: newSaved})
+             
 
                 console.log(this.state.savedBreweries)
             }
