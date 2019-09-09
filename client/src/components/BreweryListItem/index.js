@@ -19,8 +19,9 @@ const Address = styled.span`
 `;
 
 const StyledCard = styled(Card)`
-  box-shadow: 1px;
+  box-shadow: .1px;
   margin: .4rem;
+  max-width: 40rem;
 `;
 
 const BreweryListItem = (props) => {

@@ -180,6 +180,30 @@ export default class Itinerary extends React.Component {
 
     }
 
+    handleDelete = (id) => {
+        alert("deleted: " + id)
+
+
+        // var newStateArray = this.state.savedList.slice();
+
+        // newStateArray.push({
+        //     id: id,
+        //     brewery: brewery,
+        //     url: url,
+        //     status: status,
+        //     street: street,
+        //     city: city,
+        //     state: state
+        // });
+
+        // this.setState({ savedList: newStateArray });
+        // //need to save other data
+
+        // API.getAllSaved()
+        //     .then(data => console.log(data))
+        //     .catch(err => console.log(err))
+    }
+
     render() {
         return (
             <>
@@ -191,7 +215,6 @@ export default class Itinerary extends React.Component {
                                     value={this.state.search}
                                     handleInputChange={this.handleInputChange}
                                     handleSubmit={this.handleSubmit}
-                            
                                 />
                         </Row>
                         <Row className="m-2 p-2">
@@ -214,15 +237,15 @@ export default class Itinerary extends React.Component {
 
                                                 <BreweryListItem
                                                     key={brewery.id}
-                                                    name={brewery.name}
+                                                    brewery={brewery.name}
                                                     street={brewery.street}
                                                     state={brewery.state}
                                                     city={brewery.city}
                                                     url={brewery.url}
                                                     status={brewery.status}
                                                     handleSave={this.handleSave}
+                                                    handleDelete={this.handleDelete}
                                                     id={brewery.id}
-                                                    saved={false}
                                                 >
                                                 </BreweryListItem>
                                             ))}

@@ -3,8 +3,15 @@ import NavBar from "../components/NavBar"
 import API from "../utils/API"
 import BreweryListItem from "../components/BreweryListItem"
 import { Container } from 'reactstrap';
-// import styled from "styled-components";
+import styled from "styled-components";
 
+const ListContainer = styled(Container)`
+    border-style: solid 1px grey;
+    height: 100%;
+    margin: 0 0 6rem 0;
+    width: 100%;
+    overflow-y: scroll;
+`;
 
 
 
@@ -66,7 +73,7 @@ class Saved extends Component {
             <>
                 <NavBar />
 
-                <Container  >
+                <ListContainer  >
                     {this.state.savedBreweries.length ? (
                         <div >
                             {this.state.savedBreweries.map(brewery => (
@@ -91,7 +98,7 @@ class Saved extends Component {
                     ) : (
                             <h3>No Results to Display</h3>
                         )}
-                </Container>
+                </ListContainer>
             </>
         )
     }
