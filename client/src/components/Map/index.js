@@ -83,7 +83,6 @@ export class MapContainer extends Component {
       >
         {this.props.mapPins.map(pin => {
           return <Marker
-          
             onClick={this.onMarkerClick}
             position={pin}
           />

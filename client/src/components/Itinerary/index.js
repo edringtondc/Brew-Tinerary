@@ -236,8 +236,8 @@ export default class Itinerary extends React.Component {
                                             {this.state.breweryList.map(brewery => (
 
                                                 <BreweryListItem
-                                                    key={brewery.id}
-                                                    brewery={brewery.name}
+                                                    key={brewery.name}
+                                                    name={brewery.name}
                                                     street={brewery.street}
                                                     state={brewery.state}
                                                     city={brewery.city}
