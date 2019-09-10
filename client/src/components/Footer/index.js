@@ -9,6 +9,11 @@ const FooterDiv = styled.div`
     width: 100%
 `;
 
+const FooterLink = styled.a`
+    text-decoration: none;
+    color: #fff;
+`;
+
 function Footer() {
 
     return (
@@ -17,10 +22,10 @@ function Footer() {
             <FooterDiv className="footer bg-dark mt-3">
                 <div className="container">
                     <Row className="d-flex justify-content-center">
-                        <span className="text-muted">Brought to you by <a href="https://www.elisabethedrington.com" rel="noopener noreferrer" target="_blank">Elisabeth Edrington</a> and <a href="https://www.linkedin.com/in/tiffany-cuneo/">Tiffiany Cuneo</a></span>
+                        <span className="text-muted">Brought to you by <FooterLink href="https://www.elisabethedrington.com" rel="noopener noreferrer" target="_blank">Elisabeth Edrington</FooterLink> </span>
                     </Row>
                     <Row className="d-flex justify-content-center">
-                        <a href="https://github.com/edringtondc/Brew-Tinerary">GitHub Repository</a>
+                    <span className="text-muted">Check it out on <FooterLink href="https://github.com/edringtondc/Brew-Tinerary">GitHub</FooterLink></span>
                     </Row>     
                     </div>
             </FooterDiv>
