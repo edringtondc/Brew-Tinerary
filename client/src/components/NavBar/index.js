@@ -8,11 +8,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
 
 // const Icon = styled.img`
@@ -91,23 +87,7 @@ class NavBar extends React.Component {
                 <NavLink href="/Login" style={this.style}>LogIn</NavLink>
               </NavItem>
 
-              {/* <UncontrolledDropdown nav inNavbar >
-                <DropdownToggle nav caret style={this.style}>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
+      
             </Nav>
           </Collapse>
         </StyledNav>
