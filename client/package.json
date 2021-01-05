@@ -6,7 +6,7 @@
   "homepage": "https://sheltered-ocean-66992.herokuapp.com/",
   "dependencies": {
     "@atlaskit/css-reset": "^3.0.5",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.2.1",
     "babel-loader": "8.0.4",
     "google-maps-react": "^2.0.2",
